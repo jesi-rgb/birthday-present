@@ -1,0 +1,149 @@
+$padding: 15px;
+$border: 15px;
+
+$colors: (
+    primary: #323232,
+    accent2:#a8a8a8,
+    accent:#ffac41,
+
+);
+
+@function color($color-name) {
+    @return map-get($colors, $color-name)
+}
+
+$desktop: 840px;
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
+
+
+body, html {
+    height: 100%;
+
+}
+
+body {
+    font-family: Monserrat, Avenir, Consolas, Nunito;
+    margin: 0;
+    background-color: color(accent);
+
+    #bg {
+        clip-path: polygon(100% 0, 100% 78%, 50% 100%, 0 100%, 0 0);
+        background-color: color(primary);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: -1;
+
+        @include desktop {
+            clip-path: polygon(0 0, 82% 0, 63% 100%, 0 100%);
+        }
+    }
+
+    header a {
+        color: color(accent);
+        text-decoration: uppercase;
+        padding: $padding;
+
+    }
+}
+
+main {
+
+    @include desktop {
+        display: grid;
+        grid-template-columns: 50% auto;
+        grid-template-areas: "primary card";
+    }
+
+    section#left{
+        text-align: left;
+    }
+    
+    section#card2{
+        background: color(accent2);
+        padding: 20px;
+        font-weight: bold;
+        margin: 1em auto;
+        border-radius: $border;
+        box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
+        width: 80%;
+
+        @include desktop {
+            grid-area: card;
+            height: fit-content;
+            align-self: left;
+            margin: 1em;
+        }
+    }
+    
+
+    section#card {
+        background: color(accent);
+        padding: 20px;
+        font-weight: bold;
+        margin: 1em auto;
+        border-radius: $border;
+        box-shadow: 5px 5px 1px rgba(0, 0, 0, 1);
+        width: 80%;
+
+        @include desktop {
+            grid-area: card;
+            height: fit-content;
+            align-self: left;
+            margin: 1em;
+        }
+
+        ol{
+            
+            li{
+                margin: 5px;
+            }
+        }
+
+        
+    }
+
+    h1#card{
+        color: #ffffff;
+        padding-left: $padding;
+    }
+
+    section#primary{
+        color: #ffffff;
+        padding: $padding;
+        text-align: center;
+
+        @include desktop {
+            grid-area: primary;
+            text-align: left;
+            margin: 4em 0 0 4em;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-top: 10px;
+        }
+
+        p{
+            font-size: 1.4em;
+        }
+
+        a{
+            color: color(accent2);
+            border-radius: $border;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            background-color: color(accent);
+            display: block;
+            text-align: center;
+            margin: 50px auto 0 auto;
+            padding: $padding;
+        }
+    }
+}
